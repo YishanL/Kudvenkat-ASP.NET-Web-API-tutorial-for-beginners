@@ -71,7 +71,7 @@ namespace EmployeeService
             // Sometimes you may not want to enable cors globally for the entire application. We can decorate a particular controller with "EnableCorsAttribute".
 
 
-            config.Filters.Add(new RequireHttpsAttribute());
+            //config.Filters.Add(new RequireHttpsAttribute());
             // this enables HTTPS for the entire Web API application that is for all the controllers and action methods.
             // If you want to enable HTTPS only for specific controllers within your Web API application, not register here, instead decorate only those controllers which you want to enable HTTPS
         }

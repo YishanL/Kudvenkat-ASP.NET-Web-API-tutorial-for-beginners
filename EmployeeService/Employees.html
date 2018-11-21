@@ -9,28 +9,43 @@
             var ulEmployees = $('#ulEmployees');
 
             $('#btn').click(function () {
+                var username = $('#txtUsername').val();
+                var password = $('#txtPassword').val();
+
                 $.ajax({
                     type: 'GET',
                     url: 'api/Employees', //In this example, both the client that is the HTML page which contains our jQuery code and the ASP.NET Web API service they are present in the same project that is our employee service project, so the Ajax call is working as expected. But if these two are presented in different projects, then the Ajax call wouldn't work.
                     dataType: 'json',
+                    headers: {
+                        'Authorization' : 'Basic ' + btoa(username + ':' + password)
+                    },
                     success: function (data) {
                         ulEmployees.empty();
                         $.each(data, function (index, val) {
                             var fullName = val.FirstName + ' ' + val.LastName;
-                            ulEmployees.append('<li>' + fullName + '</li>');
+                            ulEmployees.append('<li>' + fullName +  '(' + val.Gender + ')</li>');
                         });
+                    },
+                    complete: function(jqXHR) { //stands for jQueryXmlHttpRequestObj
+                        if (jqXHR.status == '401') {
+                            ulEmployees.empty();
+                            ulEmployees.append('<li style="color:red">' + jqXHR.status + '</li>');
+                        }
                     }
                 });
             });
 
-            $('#btnClear').click(function() {
+            $('#btnClear').click(function () {
                 ulEmployees.empty();
             });
         });
     </script>
 </head>
 <body>
-    <input id="btn" type="button" value="Get All Employees" />
+    Username : <input type="text" id="txtUsername" />
+    Password : <input type="password" id="txtPassword" />
+    <br /><br />
+    <input id="btn" type="button" value="Authenticate and Get Employees" />
     <input id="btnClear" type="button" value="Clear" />
     <ul id="ulEmployees"></ul>
 </body>
