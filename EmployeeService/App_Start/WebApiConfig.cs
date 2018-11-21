@@ -2,6 +2,7 @@
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApiContrib.Formatting.Jsonp;
 
 namespace EmployeeService
@@ -49,8 +50,19 @@ namespace EmployeeService
             // Approach 2
             config.Formatters.Add(new CustomJsonFormatter());
 
-            var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
-            config.Formatters.Insert(0, jsonpFormatter);
+            // Issue cross domain ajax calls by using Jsonp
+            //var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
+            //config.Formatters.Insert(0, jsonpFormatter);
+
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            // The first parameter "origins", is a comma separated list of websites that we want to be able to issue cross domain ajax calls
+            // e.g. new EnableCorsAttribute("http://localhost:34049, http://pragimtech.com", "*", "");
+            // The second parameter "headers", is a comma separated list of headers that are supported by the resource
+            // The third parameter "methods", is a comma separated list of methods that is supported by the resource
+            // e.g. if you want to issue cross domain ajax calls to GET method only, can just specify GET there
+            config.EnableCors(cors);
+            // These two lines of code that we have in the Register() method enables cors globally for the entire application, that is for all the controllers and all action methods
+            // Sometimes you may not want to enable cors globally for the entire application. We can decorate a particular controller with "EnableCorsAttribute".
         }
     }
 }
