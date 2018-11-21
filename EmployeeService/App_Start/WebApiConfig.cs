@@ -2,6 +2,7 @@
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using WebApiContrib.Formatting.Jsonp;
 
 namespace EmployeeService
 {
@@ -45,7 +46,11 @@ namespace EmployeeService
             // Approach 1
             //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
+            // Approach 2
             config.Formatters.Add(new CustomJsonFormatter());
+
+            var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
+            config.Formatters.Insert(0, jsonpFormatter);
         }
     }
 }
