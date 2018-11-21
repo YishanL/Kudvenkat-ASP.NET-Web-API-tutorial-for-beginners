@@ -12,6 +12,7 @@ namespace EmployeeService.Controllers
     public class EmployeesController : ApiController
     {
         [HttpGet]
+        [RequireHttps]
         public HttpResponseMessage LoadAllEmployees(string gender="All")
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
