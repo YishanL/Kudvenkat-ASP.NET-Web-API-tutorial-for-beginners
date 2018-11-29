@@ -7,6 +7,8 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using EmployeeService.Facebook;
+using Microsoft.Owin.Security.Facebook;
 
 namespace EmployeeService
 {
@@ -52,9 +54,19 @@ namespace EmployeeService
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "1612407058860607",
+                appSecret: "b559d222d15c894bd0b7c85bf9d98c10");
+
+            //var facebookOptions = new FacebookAuthenticationOptions()
+            //{
+            //    AppId = "1612407058860607",
+            //    AppSecret = "b559d222d15c894bd0b7c85bf9d98c10",
+            //    BackchannelHttpHandler = new FackbookBackChannelHandler(),
+            //    UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,email"
+            //};
+            //facebookOptions.Scope.Add("email");
+            //app.UseFacebookAuthentication(facebookOptions);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
