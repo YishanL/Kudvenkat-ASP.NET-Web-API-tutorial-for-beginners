@@ -16,7 +16,7 @@
         <div class="well hidden" id="divData">
             <table class="table table-bordered" id="tblData">
                 <thead>
-                    <tr>
+                    <tr class="success">
                         <td>ID</td>
                         <td>First Name</td>
                         <td>Last Name</td>
@@ -64,7 +64,7 @@
                 window.location.href = "Login.html";
             }
 
-            $('#btnLogoff').click(function() {
+            $('#btnLogoff').click(function () {
                 localStorage.removeItem('accessToken');
                 window.location.href = "Login.html";
             });

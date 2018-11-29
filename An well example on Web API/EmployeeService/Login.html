@@ -11,10 +11,10 @@
             <table class="table table-bordered">
                 <thread>
                     <tr class="success">
-                        <td colspan="2">
+                        <th colspan="2">
                             Existing User Login
                             <a class="btn btn-success pull-right" href="Register.html">Register</a>
-                        </td>
+                        </th>
                     </tr>
                 </thread>
                 <tbody>
@@ -38,6 +38,22 @@
                 </tbody>
             </table>
 
+            <table class="table table-bordered">
+                <thread>
+                    <tr class="success">
+                        <th>
+                            Social Logins
+                        </th>
+                    </tr>
+                </thread>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="button" id="btnGoogleLogin" value="Login with Google" class="btn btn-success" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div id="divError" class="alert alert-danger collapse">
                 <a id="linkClose" class="close" href="#">&times;</a>
                 <div id="divErrorText"></div>
@@ -47,8 +63,16 @@
 
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/GoogleAuthentication.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            getAccesstoken();
+
+            $('#btnGoogleLogin').click(function () {
+                window.location.href = "/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A30380%2FLogin.html&state=mF3uGzUBkM7sgV4sE_GjFnhZfDMPVrA1-G5p_Ku0TSk1";
+            });
+
+
             $('#linkClose').click(function () {
                 $('#divError').hide('fade');
             });
@@ -63,12 +87,12 @@
                         password: $('#txtPassword').val(),
                         grant_type: 'password'
                     },
-                    success: function(response) {
+                    success: function (response) {
                         localStorage.setItem('accessToken', response.access_token);
                         localStorage.setItem('userName', response.userName);
                         window.location.href = "Data.html";
                     },
-                    error: function(jqXHR) {
+                    error: function (jqXHR) {
                         $('#divErrorText').text(jqXHR.responseText);
                         $('#divError').show('fade');
                     }

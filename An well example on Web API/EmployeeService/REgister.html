@@ -89,10 +89,10 @@
                         password: $('#txtPassword').val(),
                         confirmPassword: $('#txtConfirmPassword').val()
                     },
-                    success: function() {
+                    success: function () {
                         $('#successModal').modal('show');
                     },
-                    error: function(jqXHR) {
+                    error: function (jqXHR) {
                         $('#divErrorText').text(jqXHR.responseText);
                         $('#divError').show('fade');
                     }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using EmployeeService.Models;
+using EmployeeService.Providers;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using EmployeeService.Providers;
-using EmployeeService.Models;
+using System;
 
 namespace EmployeeService
 {
@@ -59,11 +56,11 @@ namespace EmployeeService
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "862467663783-9p7jk3t09n6okohcsnicpugbd187i92i.apps.googleusercontent.com",
+                ClientSecret = "DAAect7qr5y4BCO5PO46Pog_"
+            });
         }
     }
 }
